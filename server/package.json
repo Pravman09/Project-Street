@@ -9,7 +9,6 @@
   "start": "node dist/server/src/index.js",
   "test": "npm run build && node --test dist/server/test/*.test.js",
   "test:integration": "npm run build && node test/live.mjs"
-}
 },
 "engines": {
 "node": ">=20"
