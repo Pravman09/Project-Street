@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.local
+.env
+*.tsbuildinfo
+.DS_Store
+.vinext/
+.wrangler/
+.next/
