@@ -1,0 +1,41 @@
+{
+  "name": "open-world-racer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vinext dev",
+    "dev:multiplayer": "npm --prefix server run dev",
+    "build": "npm run build:vinext",
+    "build:sites": "npm run build:vinext",
+    "preview": "vinext start",
+    "dev:vinext": "vinext dev --port 3001",
+    "build:vinext": "vinext build && node scripts/prepare-sites.mjs",
+    "start:vinext": "wrangler dev --config dist/server/wrangler.json",
+    "deploy:vinext": "vinext-cloudflare deploy --config dist/server/wrangler.json",
+    "build:multiplayer": "npm --prefix server run build",
+    "test:multiplayer": "npm --prefix server test"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
+    "@vinext/cloudflare": "^1.0.0-beta.2",
+    "@vitejs/plugin-rsc": "^0.5.26",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-server-dom-webpack": "^19.2.7",
+    "socket.io-client": "^4.8.3",
+    "three": "0.185.1",
+    "vinext": "^1.0.0-beta.2"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.45.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.185.1",
+    "@vitejs/plugin-react": "6.0.3",
+    "typescript": "6.0.3",
+    "vite": "8.1.5",
+    "wrangler": "^4.112.0"
+  }
+}

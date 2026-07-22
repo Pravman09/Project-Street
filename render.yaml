@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: project-street-multiplayer
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: ROOM_RECONNECT_SECONDS
+        value: 20
+
