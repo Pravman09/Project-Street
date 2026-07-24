@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react'
+import { useState, type CSSProperties, type FormEvent } from 'react'
 import { CAR_CATALOG, DEFAULT_CAR } from '../game/carCatalog'
 import type { CarTelemetry } from '../game/carPhysics'
 import { formatPursuitTime, type PoliceTacticTelemetry, type PoliceTelemetry, type PursuitState } from '../game/policeSystem'
@@ -72,6 +72,7 @@ interface HudProps {
   onStartRace: (eventId: string) => void
   onDismissResults: () => void
   onUnlockCar: (carId: string) => void
+  onRedeemCode: (code: string) => { ok: boolean; message: string }
   onBackToMenu: () => void
   onTogglePause: () => void
   onOpenSettings: () => void
@@ -95,6 +96,39 @@ const mapPercentX = (value: number) => ((value - WORLD_BOUNDS.minX) / WORLD_WIDT
 const mapPercentZ = (value: number) => ((value - WORLD_BOUNDS.minZ) / WORLD_DEPTH) * 100
 
 const formatCash = (value: number) => `$${value.toLocaleString('en-US')}`
+
+function RedeemCodePanel({ compact = false, onRedeemCode }: { compact?: boolean; onRedeemCode: (code: string) => { ok: boolean; message: string } }) {
+  const [code, setCode] = useState('')
+  const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null)
+
+  const submitCode = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const result = onRedeemCode(code)
+    setMessage({ ok: result.ok, text: result.message })
+    if (result.ok) setCode('')
+  }
+
+  return (
+    <form className={compact ? 'redeem-panel redeem-panel--compact' : 'redeem-panel'} onSubmit={submitCode}>
+      <div className="redeem-panel__title">
+        <span>REDEEM CODE</span>
+        <small>{compact ? 'BONUS CLAIM' : 'CASH // CARS'}</small>
+      </div>
+      <div className="redeem-panel__row">
+        <input
+          aria-label="Redeem code"
+          autoComplete="off"
+          spellCheck={false}
+          placeholder="TYPE CODE EXACTLY"
+          value={code}
+          onChange={(event) => setCode(event.target.value)}
+        />
+        <button type="submit" disabled={!code.trim()}>REDEEM</button>
+      </div>
+      {message && <strong className={message.ok ? 'redeem-panel__message' : 'redeem-panel__message redeem-panel__message--error'}>{message.text}</strong>}
+    </form>
+  )
+}
 
 export function Hud({
   graphicsQuality,
@@ -137,6 +171,7 @@ export function Hud({
   onStartRace,
   onDismissResults,
   onUnlockCar,
+  onRedeemCode,
   onBackToMenu,
   onTogglePause,
   onOpenSettings,
@@ -242,6 +277,7 @@ export function Hud({
                   <button onClick={onOpenSettings}><span>SETTINGS & CONTROLS</span><b>›</b></button>
                   <button className="danger" onClick={onBackToMenu}><span>{multiplayerActive ? 'LEAVE MULTIPLAYER' : 'RETURN TO GARAGE'}</span><b>›</b></button>
                 </div>
+                <RedeemCodePanel compact onRedeemCode={onRedeemCode} />
                 <div className="pause-card__footer"><span>GAMEPLAY IS FULLY FROZEN</span><b>PROGRESS SAVES AUTOMATICALLY</b></div>
               </>
             ) : (
@@ -319,6 +355,7 @@ export function Hud({
             </h1>
             <p>Choose your build. Take over Port Meridian.</p>
             <div className="garage-wallet">CAREER CASH <strong>{formatCash(cash)}</strong></div>
+            <RedeemCodePanel onRedeemCode={onRedeemCode} />
           </div>
 
           <aside className="career-board glass-panel">

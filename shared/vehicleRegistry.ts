@@ -146,6 +146,66 @@ export const CAR_CATALOG: VehicleDefinition[] = [
     unlockType: 'premium', unlockRequirement: '$95,000', price: 95000, accent: '#7dcbe3', modelYOffset: 0.726,
     performance: { topSpeed: 57, acceleration: 23, handling: 0.82, grip: 0.9, brakePower: 0.94, nitroEfficiency: 1.08 },
   },
+   {
+  id: 'lamborghini-sian',
+  name: 'Lamborghini Sian',
+  modelPath: '/models/LamborghiniSian.glb',
+
+  category: 'Italian Hypercar',
+  className: 'Hypercar',
+  rarity: 'legendary',
+
+  topSpeed: 89,
+  acceleration: 41,
+  handling: 0.97,
+  braking: 0.98,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$1000',
+  price: 1000,
+
+  accent: '#7AFF00',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 89,
+    acceleration: 41,
+    handling: 0.97,
+    grip: 0.98,
+    brakePower: 0.98,
+    nitroPower: 1.20
+  },
+},
+{
+  id: 'lamborghini-svj',
+  name: 'Lamborghini Aventador SVJ',
+  modelPath: '/models/LamborghiniSVJ63.glb',
+
+  category: 'Italian Supercar',
+  className: 'Hypercar',
+  rarity: 'epic',
+
+  topSpeed: 84,
+  acceleration: 39,
+  handling: 0.95,
+  braking: 0.97,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$1,000',
+  price: 1000,
+
+  accent: '#A6FF00',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 84,
+    acceleration: 39,
+    handling: 0.95,
+    grip: 0.97,
+    brakePower: 0.97,
+    nitroPower: 1.16
+  },
+},
 ]
 
 export const DEFAULT_CAR = CAR_CATALOG[0]!

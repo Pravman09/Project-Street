@@ -23,6 +23,7 @@ import {
   type ReleaseSettings,
 } from './game/gameSettings'
 import { resetDestructibles } from './game/destructibleObjects'
+import { REDEEM_CODES } from './game/redeemCodes'
 import {
   getDefaultGraphicsQuality,
   getNextGraphicsQuality,
@@ -93,6 +94,7 @@ export default function App() {
   const [carLoadState, setCarLoadState] = useState<CarLoadState>('idle')
   const [cash, setCash] = useState(0)
   const [unlockedCarIds, setUnlockedCarIds] = useState<string[]>(STARTER_CAR_IDS)
+  const [redeemedCodeIds, setRedeemedCodeIds] = useState<string[]>([])
   const [careerRep, setCareerRep] = useState(0)
   const [defeatedRivalIds, setDefeatedRivalIds] = useState<string[]>([])
   const [careerWins, setCareerWins] = useState(0)
@@ -155,6 +157,7 @@ export default function App() {
           upgradeGarage?: UpgradeGarage
           customizationGarage?: CustomizationGarage
           releaseSettings?: Partial<ReleaseSettings>
+          redeemedCodeIds?: string[]
         }
         const validIds = new Set(CAR_CATALOG.map((car) => car.id))
         const savedIds = (parsed.unlockedCarIds ?? []).filter((id) => validIds.has(id))
@@ -165,6 +168,7 @@ export default function App() {
         setCareerRep(Math.max(0, Math.floor(parsed.careerRep ?? 0)))
         setDefeatedRivalIds((parsed.defeatedRivalIds ?? []).filter((id) => typeof id === 'string'))
         setCareerWins(Math.max(0, Math.floor(parsed.careerWins ?? 0)))
+        setRedeemedCodeIds((parsed.redeemedCodeIds ?? []).filter((id) => typeof id === 'string'))
         if (parsed.upgradeGarage && typeof parsed.upgradeGarage === 'object') setUpgradeGarage(parsed.upgradeGarage)
         if (isCustomizationGarage(parsed.customizationGarage)) setCustomizationGarage(parsed.customizationGarage)
         if (parsed.releaseSettings && typeof parsed.releaseSettings === 'object') {
@@ -192,8 +196,8 @@ export default function App() {
 
   useEffect(() => {
     if (!progressReady) return
-    window.localStorage.setItem('project-street-progress-v1', JSON.stringify({ cash, unlockedCarIds, manualTransmission, graphicsQuality, careerRep, defeatedRivalIds, careerWins, upgradeGarage, customizationGarage, releaseSettings }))
-  }, [careerRep, careerWins, cash, customizationGarage, defeatedRivalIds, graphicsQuality, manualTransmission, progressReady, releaseSettings, unlockedCarIds, upgradeGarage])
+    window.localStorage.setItem('project-street-progress-v1', JSON.stringify({ cash, unlockedCarIds, manualTransmission, graphicsQuality, careerRep, defeatedRivalIds, careerWins, upgradeGarage, customizationGarage, releaseSettings, redeemedCodeIds }))
+  }, [careerRep, careerWins, cash, customizationGarage, defeatedRivalIds, graphicsQuality, manualTransmission, progressReady, redeemedCodeIds, releaseSettings, unlockedCarIds, upgradeGarage])
 
   useEffect(() => {
     if (!started || paused) return
@@ -362,6 +366,38 @@ export default function App() {
     setCash((current) => current - car.price)
     setUnlockedCarIds((current) => [...current, carId])
   }, [cash, unlockedCarIds])
+
+  const redeemCode = useCallback((rawCode: string) => {
+    const code = rawCode.trim()
+    const redeemCodeDefinition = REDEEM_CODES.find((candidate) => candidate.code === code)
+    if (!redeemCodeDefinition) return { ok: false, message: 'Invalid code' }
+    if (!redeemCodeDefinition.reusable && redeemedCodeIds.includes(redeemCodeDefinition.code)) {
+      return { ok: false, message: 'Code already used' }
+    }
+
+    const reward = redeemCodeDefinition.reward
+    const rewardMessages: string[] = []
+    if (reward.cash && reward.cash > 0) {
+      setCash((current) => current + reward.cash!)
+      rewardMessages.push(`$${reward.cash.toLocaleString('en-US')} added`)
+    }
+
+    if (reward.carIds?.length) {
+      const validCarIds = new Set(CAR_CATALOG.map((car) => car.id))
+      const rewardCarIds = reward.carIds.filter((carId) => validCarIds.has(carId))
+      if (rewardCarIds.length) {
+        const rewardCarNames = rewardCarIds.map((carId) => CAR_CATALOG.find((car) => car.id === carId)?.name ?? carId)
+        setUnlockedCarIds((current) => Array.from(new Set([...current, ...rewardCarIds])))
+        rewardMessages.push(`${rewardCarNames.join(', ')} unlocked`)
+      }
+    }
+
+    if (!redeemCodeDefinition.reusable) {
+      setRedeemedCodeIds((current) => current.includes(redeemCodeDefinition.code) ? current : [...current, redeemCodeDefinition.code])
+    }
+
+    return { ok: true, message: rewardMessages.length ? `Code redeemed: ${rewardMessages.join(' // ')}` : 'Code redeemed' }
+  }, [redeemedCodeIds])
 
   const buyUpgrade = useCallback((part: UpgradePart) => {
     if (!selectedCarUnlocked) return
@@ -793,6 +829,7 @@ export default function App() {
         onStartRace={startRace}
         onDismissResults={dismissResults}
         onUnlockCar={unlockCar}
+        onRedeemCode={redeemCode}
         onBackToMenu={multiplayerActive ? () => { void leaveMultiplayer() } : returnToGarage}
         onTogglePause={togglePause}
         onOpenSettings={() => setSettingsOpen(true)}

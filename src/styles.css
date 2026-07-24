@@ -973,6 +973,92 @@ kbd {
   color: #dffbff;
 }
 
+.redeem-panel {
+  width: min(360px, 88vw);
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid rgba(80, 223, 255, 0.22);
+  border-left: 2px solid #51e9ff;
+  background: rgba(3, 11, 22, 0.72);
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.redeem-panel--compact {
+  width: auto;
+  margin: 0 36px 20px;
+  padding: 10px 12px;
+  border-color: rgba(112, 157, 181, 0.2);
+}
+
+.redeem-panel__title {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: #e8fbff;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.redeem-panel__title small {
+  color: #61788c;
+  font-size: 6px;
+}
+
+.redeem-panel__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 7px;
+}
+
+.redeem-panel input {
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid rgba(84, 154, 177, 0.3);
+  outline: none;
+  color: #effcff;
+  background: rgba(5, 16, 28, 0.9);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.redeem-panel input:focus {
+  border-color: #49e6ff;
+  box-shadow: 0 0 0 2px rgba(73, 230, 255, 0.08);
+}
+
+.redeem-panel button {
+  padding: 0 12px;
+  border: 0;
+  color: #041017;
+  background: #54e9ff;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.redeem-panel button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.redeem-panel__message {
+  display: block;
+  margin-top: 8px;
+  color: #69f0b8;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.redeem-panel__message--error {
+  color: #ff7890;
+}
+
 .career-board {
   position: absolute;
   top: clamp(122px, 18vh, 170px);
