@@ -161,8 +161,8 @@ export const CAR_CATALOG: VehicleDefinition[] = [
   braking: 0.98,
 
   unlockType: 'purchase',
-  unlockRequirement: '$1000',
-  price: 1000,
+  unlockRequirement: '$1,000,000',
+  price: 1000000,
 
   accent: '#7AFF00',
   modelYOffset: 0.20,
@@ -191,8 +191,8 @@ export const CAR_CATALOG: VehicleDefinition[] = [
   braking: 0.97,
 
   unlockType: 'purchase',
-  unlockRequirement: '$1,000',
-  price: 1000,
+  unlockRequirement: '$1,000,000',
+  price: 1000000,
 
   accent: '#A6FF00',
   modelYOffset: 0.20,
