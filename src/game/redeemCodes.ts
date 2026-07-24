@@ -39,10 +39,11 @@ export const REDEEM_CODES: RedeemCodeDefinition[] = [
     code: 'PravMclarenP1',
     reusable: false,
     reward: { carIds: ['mclaren-p1'] },
-  }
-  { code: 'PravAventador',
+  },
+  {
+    code: 'PravAventador',
     reusable: false,
     reward: { carIds: ['lamborghini-aventador'] },
-  }
+  },
 
 ]
