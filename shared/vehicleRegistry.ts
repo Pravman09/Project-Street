@@ -155,21 +155,21 @@ export const CAR_CATALOG: VehicleDefinition[] = [
   className: 'Hypercar',
   rarity: 'legendary',
 
-  topSpeed: 89,
-  acceleration: 41,
+  topSpeed: 100,
+  acceleration: 50,
   handling: 0.97,
   braking: 0.98,
 
   unlockType: 'purchase',
-  unlockRequirement: '$1000',
-  price: 1000,
+  unlockRequirement: '$1,500,000',
+  price: 1500000,
 
   accent: '#7AFF00',
   modelYOffset: 0.20,
 
   performance: {
-    topSpeed: 89,
-    acceleration: 41,
+    topSpeed: 100,
+    acceleration: 50,
     handling: 0.97,
     grip: 0.98,
     brakePower: 0.98,
@@ -191,8 +191,8 @@ export const CAR_CATALOG: VehicleDefinition[] = [
   braking: 0.97,
 
   unlockType: 'purchase',
-  unlockRequirement: '$1,000',
-  price: 1000,
+  unlockRequirement: '$1,500,000',
+  price: 1500000,
 
   accent: '#A6FF00',
   modelYOffset: 0.20,
@@ -204,6 +204,156 @@ export const CAR_CATALOG: VehicleDefinition[] = [
     grip: 0.97,
     brakePower: 0.97,
     nitroPower: 1.16
+  },
+},
+{
+  id: 'mclaren-p1',
+  name: 'McLaren P1',
+  modelPath: '/models/MclarenP1.glb',
+
+  category: 'British Hypercar',
+  className: 'Hypercar',
+  rarity: 'legendary',
+
+  topSpeed: 86,
+  acceleration: 41,
+  handling: 0.98,
+  braking: 0.99,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$1,900,000',
+  price: 1900000,
+
+  accent: '#F68B1F',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 86,
+    acceleration: 41,
+    handling: 0.98,
+    grip: 0.99,
+    brakePower: 0.99,
+    nitroPower: 1.17,
+  },
+},
+{
+  id: 'lamborghini-aventador',
+  name: 'Lamborghini Aventador Ultimae',
+  modelPath: '/models/LamborghiniAventador.glb',
+
+  category: 'Italian Supercar',
+  className: 'Hypercar',
+  rarity: 'epic',
+
+  topSpeed: 84,
+  acceleration: 39,
+  handling: 0.95,
+  braking: 0.97,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$1,800,000',
+  price: 1800000,
+
+  accent: '#FFE500',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 84,
+    acceleration: 39,
+    handling: 0.95,
+    grip: 0.97,
+    brakePower: 0.97,
+    nitroPower: 1.16,
+  },
+},
+{
+  id: 'lamborghini-centenario',
+  name: 'Lamborghini Centenario',
+  modelPath: '/models/LamborghiniCentenario.glb',
+
+  category: 'Italian Hypercar',
+  className: 'Legendary',
+  rarity: 'legendary',
+
+  topSpeed: 88,
+  acceleration: 41,
+  handling: 0.97,
+  braking: 0.98,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$2,700,000',
+  price: 2700000,
+
+  accent: '#BFBFBF',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 88,
+    acceleration: 41,
+    handling: 0.97,
+    grip: 0.98,
+    brakePower: 0.98,
+    nitroPower: 1.19,
+  },
+},
+{
+  id: 'aston-martin-vulcan',
+  name: 'Aston Martin Vulcan',
+  modelPath: '/models/AstonMartinVulcan.glb',
+
+  category: 'British Track Car',
+  className: 'Track',
+  rarity: 'legendary',
+
+  topSpeed: 82,
+  acceleration: 38,
+  handling: 0.99,
+  braking: 1.00,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$2,200,000',
+  price: 2200000,
+
+  accent: '#00C878',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 82,
+    acceleration: 38,
+    handling: 0.99,
+    grip: 1.00,
+    brakePower: 1.00,
+    nitroPower: 1.12,
+  },
+},
+{
+  id: 'ferrari-f40',
+  name: 'Ferrari F40',
+  modelPath: '/models/FerrariF40.glb',
+
+  category: 'Italian Classic',
+  className: 'Supercar',
+  rarity: 'epic',
+
+  topSpeed: 74,
+  acceleration: 34,
+  handling: 0.92,
+  braking: 0.94,
+
+  unlockType: 'purchase',
+  unlockRequirement: '$900,000',
+  price: 900000,
+
+  accent: '#FF2A2A',
+  modelYOffset: 0.20,
+
+  performance: {
+    topSpeed: 74,
+    acceleration: 34,
+    handling: 0.92,
+    grip: 0.94,
+    brakePower: 0.94,
+    nitroPower: 1.08,
   },
 },
 ]
