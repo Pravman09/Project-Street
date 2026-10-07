@@ -2,7 +2,7 @@
 
 Project Street v32 is a browser-based, open-world street-racing game built with React, TypeScript, CSS and Three.js. It includes the complete single-player career and private real-time multiplayer for 2–6 players.
 
-*Still in **ALPHA**, So u might encounter bugs*
+*Still in **ALPHA**, So you might encounter bugs*
 
 ## Included
 
